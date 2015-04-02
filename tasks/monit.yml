@@ -1,0 +1,16 @@
+- name: create monit services directory
+  file:
+    dest: '{{ item.dest }}'
+    mode: '{{ item.mode | default("0700") }}'
+    owner: '{{ item.owner | default("root") }}'
+    group: '{{ item.group | default("root") }}'
+    state: '{{ item.state | default("directory") }}'
+  with_items:
+    - dest: /etc/monitrc.d
+    - dest: /etc/monitrc.d/services
+
+- name: install lldp monit configuration
+  copy:
+    src: etc/monitrc.d/services/lldp.cfg
+    dest: /etc/monitrc.d/services/lldp.cfg
+  notify: monit reload 

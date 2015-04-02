@@ -1,0 +1,7 @@
+---
+
+# Install lldp on current host?
+lldp_install: yes
+
+# Install monit lldp plugin?
+lldp_install_monit: no

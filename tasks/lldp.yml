@@ -1,0 +1,19 @@
+---
+
+- name: install lldp
+  apt:
+    pkg: lldpd
+    install_recommends: no
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Fix lldp default configuration
+  lineinfile:
+    dest=/etc/default/lldpd
+    regexp='^#(DAEMON_ARGS=.*)'
+    line='\1'
+    backrefs=yes
+  notify: lldpd restart
+
+- include: monit.yml
+  when: lldp_install_monit

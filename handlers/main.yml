@@ -1,0 +1,4 @@
+---
+
+- name: lldpd restart
+  service: name=lldpd state=restarted
